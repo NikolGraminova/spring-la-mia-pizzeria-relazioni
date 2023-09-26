@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head :: head('Edit')"></head>
+<body class="text-center bg-warning">
+
+<!--navbar-->
+<nav th:replace="fragments/navbar :: navbar(area = 'edit')"></nav>
+
+<!--header-->
+<h1 class="mt-5">EDIT PIZZA</h1>
+
+<!--form-->
+<div class="w-25 m-auto">
+    <form id="pizza-edit" th:action="@{/list/edit/{id}(id=${pizza.id})}" th:object="${pizza}" method="post">
+
+        <!--name-->
+        <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}"
+                   th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                <ul class="list-unstyled">
+                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--description-->
+        <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Ingredients..."
+                   th:field="*{description}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+                <ul class="list-unstyled">
+                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--price-->
+        <div class="form-group mb-3">
+            <label for="price">Price</label>
+            <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}" placeholder="5.99"
+                   th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
+                <ul class="list-unstyled">
+                    <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--image-->
+        <div class="form-group mb-3">
+            <label for="img">Image</label>
+            <input type="text" class="form-control" id="img" placeholder="https://website/image" th:field="*{img}"
+                   th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('img')}">
+                <ul class="list-unstyled">
+                    <li th:each="err : ${#fields.errors('img')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--buttons-->
+        <div class="mb-3">
+            <a class="btn btn-light mt-3 mb-5 border-black" th:href="@{/list}"><i class="fa-solid fa-ban"></i></a>
+            <button type="submit" class="btn btn-light mt-3 mb-5 border-black"><i class="fa-solid fa-check"></i>
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

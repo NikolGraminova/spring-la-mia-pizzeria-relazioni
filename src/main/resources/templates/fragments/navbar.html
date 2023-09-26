@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar</title>
+</head>
+<body>
+<nav th:fragment="navbar(area)"
+     class="navbar navbar-expand-lg navbar-light bg-light px-5 border border-black ">
+    <div class="container-fluid justify-content-between">
+        <span class="navbar-text mx-5"><i class="fa-solid fa-pizza-slice"></i></span>
+        <a class="navbar-brand">Pizzeria</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li class="nav-item active">
+                    <a class="nav-link"
+                       th:href="@{/list}"
+                       th:classappend="${#strings.equals(area,  'list') ? 'active' : ''}"
+                    >List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/list/create}"
+                       th:classappend="${#strings.equals(area, 'create') ? 'active' : ''}"
+                    >Create Pizza</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <form th:action="@{/list/search}" method="get" class="input-group">
+        <input class="form-control" type="search" placeholder="Search by ingredients..." aria-label="Search" name="q">
+        <button class="input-group-append btn btn-outline-black" type="submit">Search</button>
+    </form>
+</nav>
+</body>
+</html>
