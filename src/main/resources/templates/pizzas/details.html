@@ -22,23 +22,28 @@
             <a class="btn btn-warning my-3 border-black" th:href="@{/offers/create?pizzaId={pizzaId}(pizzaId = ${pizza.id})}">Add Offer</a>
         </div>
         <!--offers-->
-        <div class="card-footer bg-white">
+        <div class="card-footer bg-white" th:if="${pizza.offers.size() > 0}">
             <h4>Available offers:</h4>
-            <ul class="list-group list-group-flush bg-warning p-1 border border-black pt-1 m-auto" th:each="offer : ${pizza.offers}">
+            <ul class="list-group list-group-flush bg-warning border border-black pt-1 m-auto" th:each="offer : ${pizza.offers}">
                 <li class="list-group-item bg-warning d-flex justify-content-between" >
-                    <h5 th:text="${offer.title}"></h5>
+                    <!--title-->
+                    <div>
+                        <h5 th:text="${offer.title}"></h5>
+                    </div>
                     <!--buttons-->
-                    <a class="btn btn-warning border-black" th:href="@{/offers/edit/{offerId}(offerId = ${offer.id})}">
-                        <i class="fa-solid fa-pen-to-square"></i></a>
-                    <form th:action="@{/offers/delete/{offerId}(offerId = ${offer.id})}"
-                          method="POST">
-                        <button type="submit" class="btn btn-warning border-black small" onclick="return confirm('Delete offer?');">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </form>
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-warning btn-sm border-black mx-1" th:href="@{/offers/edit/{offerId}(offerId = ${offer.id})}">
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                        <form th:action="@{/offers/delete/{offerId}(offerId = ${offer.id})}"
+                              method="POST">
+                            <button type="submit" class="btn btn-warning btn-sm border-black mx-1" onclick="return confirm('Delete offer?');">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </li>
                 <!--dates-->
-                <li class="list-group-item bg-warning" th:text="|${offer.startDate} ${offer.endDate}|"></li>
+                <li class="list-group-item bg-warning" th:text="|${offer.startDate}  -->  ${offer.endDate}|"></li>
             </ul>
         </div>
 </div>
