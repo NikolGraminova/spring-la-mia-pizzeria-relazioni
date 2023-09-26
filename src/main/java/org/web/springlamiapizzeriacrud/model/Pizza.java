@@ -5,12 +5,12 @@ import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
 public class Pizza {
 
-    // fields
     // fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +33,9 @@ public class Pizza {
     @NotBlank(message = "This field can't be empty")
     @URL(message = "This field must contain a valid URL")
     private String img;
+
+    @OneToMany(mappedBy = "pizza", cascade = {CascadeType.REMOVE})
+    private List<Offer> offers;
 
     // getters and setters
     public Integer getId() {
@@ -73,5 +76,13 @@ public class Pizza {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 }
