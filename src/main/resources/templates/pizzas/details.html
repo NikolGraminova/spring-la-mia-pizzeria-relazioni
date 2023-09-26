@@ -19,7 +19,7 @@
                 <p class="card-text" th:text="${pizza.description}"></p>
             </div>
             <a class="btn btn-warning my-3 border-black" th:text="|€ ${pizza.price}|"></a>
-            <a class="btn btn-warning my-3 border-black">Add Offer</a>
+            <a class="btn btn-warning my-3 border-black" th:href="@{/offers/create?pizzaId={pizzaId}(pizzaId = ${pizza.id})}">Add Offer</a>
         </div>
         <!--offers-->
         <div class="card-footer bg-white">
@@ -28,11 +28,14 @@
                 <li class="list-group-item bg-warning d-flex justify-content-between" >
                     <h5 th:text="${offer.title}"></h5>
                     <!--buttons-->
-                    <a class="btn btn-warning border-black" th:href="@{/list/edit/{id}(id=${pizza.id})}">
+                    <a class="btn btn-warning border-black" th:href="@{/offers/edit/{offerId}(offerId = ${offer.id})}">
                         <i class="fa-solid fa-pen-to-square"></i></a>
-                    <a class="btn btn-warning border-black small" th:href="@{/list/delete/{id}(id=${pizza.id})}"
-                       onclick="return confirm('Delete offer?');">
-                        <i class="fa-solid fa-trash"></i></a>
+                    <form th:action="@{/offers/delete/{offerId}(offerId = ${offer.id})}"
+                          method="POST">
+                        <button type="submit" class="btn btn-warning border-black small" onclick="return confirm('Delete offer?');">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
                 </li>
                 <!--dates-->
                 <li class="list-group-item bg-warning" th:text="|${offer.startDate} ${offer.endDate}|"></li>

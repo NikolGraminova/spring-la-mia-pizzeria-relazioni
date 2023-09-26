@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -16,13 +17,14 @@ public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank
+    @NotBlank(message = "This field can't be empty")
+    @Size(message = "Name must be between 5 and 20 characters", min = 5, max = 20)
     private String title;
-    @NotNull
-    @FutureOrPresent
+    @NotNull(message = "This field can't be empty")
+    @FutureOrPresent(message = "Date can't be in the past")
     private LocalDate startDate;
-    @NotNull
-    @FutureOrPresent
+    @NotNull(message = "This field can't be empty")
+    @FutureOrPresent(message = "Date can't be in the past")
     private LocalDate endDate;
     @ManyToOne
     private Pizza pizza;
