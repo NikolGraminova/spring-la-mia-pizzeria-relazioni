@@ -16,8 +16,11 @@
          th:each="pizza : ${pizzas}">
         <div class="card-body">
             <img class="card-img-top mb-3" th:src="${pizza.img}"/>
-            <div class="bg-warning w-75 pt-1 m-auto border border-black">
+            <div class="bg-warning w-75 pt-1 m-auto border border-black d-flex justify-content-center">
                 <h5 class="card-title" th:text="${pizza.name}"></h5>
+                <p class="mx-1 badge badge-pill bg-success"
+                   th:if="${pizza.offers.size() > 0}" th:text="${pizza.offers.size()}"
+                ></p>
             </div>
             <!--buttons-->
             <a class="btn btn-warning mt-3 border-black" th:href="@{/list/show/{id}(id=${pizza.id})}">
